@@ -19,6 +19,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthService } from './auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,8 @@ import { LoginComponent } from './login/login.component';
 
   ],
   providers: [
-    NgbDropdownConfig
+    NgbDropdownConfig,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
