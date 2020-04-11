@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
         // tslint:disable-next-line: curly
         if (user) return true;
 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
       })
     );
