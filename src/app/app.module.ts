@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AuthGuard } from './auth.guard';
     NgbDropdownConfig,
     AuthService,
     AuthGuard,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
