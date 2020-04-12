@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from 'firebase/app';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { AppUser } from './modals/app-user';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from './user.service';
@@ -35,7 +35,12 @@ export class AuthService {
   get appUser$(): Observable<AppUser> {
     return this.user$
       .pipe(
-        switchMap(user => this.userService.get(user.uid).valueChanges())
+        switchMap( user => {
+          // tslint:disable-next-line:curly
+          if (user) return this.userService.get(user.uid).valueChanges();
+
+          return of(null);
+        })
       );
   }
 }
