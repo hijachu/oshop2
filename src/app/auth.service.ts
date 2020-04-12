@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
-    private router: Router) {
+  ) {
     this.user$ = afAuth.authState;
   }
 
@@ -22,7 +22,6 @@ export class AuthService {
     localStorage.setItem('returnUrl', returnUrl);
 
     this.afAuth.auth.signInWithRedirect(new auth.GoogleAuthProvider());
-
   }
 
   logout() {

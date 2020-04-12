@@ -20,8 +20,9 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
 import { UserService } from './user.service';
+import { AuthGuard } from './auth.guard';
+import { AdminAuthGuard } from './admin-auth.guard';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,16 @@ import { UserService } from './user.service';
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard] },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+      {
+        path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
 
       { path: '**', component: HomeComponent },
     ]),
@@ -64,6 +73,7 @@ import { UserService } from './user.service';
     NgbDropdownConfig,
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     UserService,
   ],
   bootstrap: [AppComponent]
