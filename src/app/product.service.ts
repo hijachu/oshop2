@@ -15,13 +15,17 @@ export class ProductService {
 
   getAll() {
     return this.db.list('/products')
-      .snapshotChanges()
-      .pipe(map(action => action
-        .map(a => {
-          const key = a.payload.key;
-          const value = a.payload.val();
-          return { key, value };
-        })));
+      .snapshotChanges().pipe(
+        map(changes => changes.map( c => ({ key: c.payload.key, ...c.payload.val() }) ))
+      );
+
+      // .snapshotChanges()
+      // .pipe(map(action => action
+      //   .map(a => {
+      //     const key = a.payload.key;
+      //     const value = a.payload.val();
+      //     return { key, value };
+      //   })));
   }
 
   get(productId) {
