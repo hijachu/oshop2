@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule, NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
@@ -48,6 +49,7 @@ import { ProductService } from './product.service';
     BrowserModule,
     FormsModule,
     CustomFormsModule,
+    NgxDatatableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
