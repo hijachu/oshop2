@@ -10,20 +10,28 @@
 </p>
 
 <ngx-datatable
-  #table
+  #tableResource
+  class="bootstrap"
   [rows]="products"
-  offset="0"
->
+  [headerHeight]="50"
+  [footerHeight]="50"
+  rowHeight="auto"
+  [limit]="10"
+  >
+  <ngx-datatable-column width="auto">
+    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+      <strong>{{ rowIndex+1 }}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
   <ngx-datatable-column
     prop="title"
     name="Title"
-    sortable="true"
     >
   </ngx-datatable-column>
   <ngx-datatable-column
     prop="price"
     name="Price"
-    sortable="true"
     >
     <ng-template let-value="value" ngx-datatable-cell-template>
       {{ value | currency:'USD':'symbol' }}
@@ -31,6 +39,8 @@
   </ngx-datatable-column>
   <ngx-datatable-column
     prop="key"
+    name=""
+    sortable="false"
     >
     <ng-template let-value="value" ngx-datatable-cell-template>
         <a [routerLink]="['/admin/products/', value]">Edit</a>
