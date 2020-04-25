@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/product.service';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/modals/product';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-admin-products',
@@ -11,18 +11,21 @@ import { Product } from 'src/app/modals/product';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
   products: Product[];
-  filteredProducts: Product[];
   subscription: Subscription;
+
+  @ViewChild(DatatableComponent, null) tableResource: DatatableComponent;
 
   constructor(private productService: ProductService) {
     this.subscription = this.productService.getAll()
-      .subscribe((products: Product[]) => this.filteredProducts = this.products = products);
+      .subscribe((products: Product[]) => this.products = products);
   }
 
   filter(query: string) {
-    this.filteredProducts = (query) ?
+    const filteredProducts = (query) ?
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
+
+    this.tableResource.rows = filteredProducts;
   }
 
   ngOnDestroy() {
